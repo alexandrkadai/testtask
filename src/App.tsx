@@ -7,7 +7,8 @@ import TaskProvider from './store/task-context';
 
 
 
-const App: React.FC  = () => {
+const App = () => {
+
   return (
     <div className="w-screen h-screen m-0 p-0">
       <Header />

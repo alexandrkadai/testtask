@@ -1,57 +1,76 @@
-import { createContext, useState } from "react"; 
-import { ITASK_TYPE, TaskContextType } from "../TYPES/TASK_TYPES";
+import { createContext, useState } from 'react';
+import { ITASK_TYPE, TaskContextType } from '../TYPES/TASK_TYPES';
 
 export const TaskContext = createContext<TaskContextType | null>(null);
 
-const TaskProvider: React.FC<{children:React.ReactNode} > = ({children}) => {
-
-  const [taskItems, setTaskItems ] = useState<ITASK_TYPE[]>([
+const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [taskItems, setTaskItems] = useState<ITASK_TYPE[]>([
     {
       id: 1,
       title: 'first Task',
       description: 'Super Description',
       status: false,
       file: null,
-    }
+    },
   ]);
 
-  const saveTask = (task:ITASK_TYPE) =>{
-    const newTask:ITASK_TYPE = {
-      id: Math.random(),
+  const saveTask = (task: ITASK_TYPE) => {
+    const newTask: ITASK_TYPE = {
+      id: task.id,
       title: task.title,
       description: task.description,
-      status: false,
       file: task.file,
+      status: task.status,
     };
-    setTaskItems([...taskItems, newTask])
+
+    setTaskItems([...taskItems, newTask]);
   };
 
-
-  const updateTask = (id:number) =>{
-    taskItems.filter((task:ITASK_TYPE) => {
-      if(task.id === id) {
-        task.status = true;
-       
+  const updateTask = (id: number) => {
+    const updatedTasks = taskItems.map((task) => {
+      if (task.id === id) {
+        return { ...task, status: !task.status };
       }
-      setTaskItems([...taskItems])
-    })
+      return task;
+    });
+    setTaskItems(updatedTasks);
   };
 
-  const deleteTask = (id:number) => {
-    taskItems.filter((task:ITASK_TYPE) => {
-      if(task.id === id) {
-        setTaskItems([...taskItems])
+  const deleteTask = (id: number) => {
+    const newTaskItems = taskItems.filter((item) => (
+      item.id !== id
+    ));
+    setTaskItems([...newTaskItems]);
+  };
+
+  const editTask = (id: number, title: string, description: string, file: any) => {
+    const updatedTasks = taskItems.map((task) => {
+      if (task.id === id && file) {
+        return {
+          ...task,
+          title: title,
+          description: description,
+          file: task.file,
+        };
+      } else{
+        return {
+          ...task,
+          title: title,
+          description: description,
+        };
       }
-    })
-  };
 
+    return task;
+    });
+    setTaskItems(updatedTasks);
+  };
+  
 
   return (
-    <TaskContext.Provider value={{ taskItems, saveTask, updateTask, deleteTask} }> 
-    {children}
+    <TaskContext.Provider value={{ taskItems, saveTask, updateTask, deleteTask, editTask }}>
+      {children}
     </TaskContext.Provider>
-  )
+  );
 };
 
 export default TaskProvider;
-
