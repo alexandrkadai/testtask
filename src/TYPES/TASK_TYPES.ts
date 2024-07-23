@@ -3,7 +3,7 @@ export interface ITASK_TYPE {
   status: boolean;
   title: string;
   description: string;
-  file: File | any;
+  file: string | any;
 }
 
 

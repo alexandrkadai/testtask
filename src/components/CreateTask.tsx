@@ -27,12 +27,13 @@ const CreateTask = () => {
     formHandler();
     console.log(formInf);
     if(titleForm.current?.value&& descriptionForm.current?.value ){
-
+    let fileName = fileForm.current?.files![0].name;
+    
     let newTask = {
       id:  Math.floor(Math.random() * 1000),
       title:titleForm.current?.value!,
       description: descriptionForm.current?.value!,
-      file: fileForm.current?.accessKey,
+      file: fileName,
       status: false,
     };
 
