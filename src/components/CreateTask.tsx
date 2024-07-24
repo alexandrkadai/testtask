@@ -5,7 +5,7 @@ import { ITASK_TYPE, TaskContextType } from '../TYPES/TASK_TYPES';
 const CreateTask = () => {
   const { saveTask } = useContext(TaskContext) as TaskContextType;
   const [formInf, setFormInf] = useState<ITASK_TYPE | {}>();
-
+  
   const titleForm = useRef<HTMLInputElement>(null);
   const descriptionForm = useRef<HTMLInputElement>(null);
   const fileForm = useRef<HTMLInputElement>(null);
@@ -22,7 +22,6 @@ const CreateTask = () => {
 
   const saveTaskHandler = (e:React.FormEvent) => {
     e.preventDefault();
-    
     
     formHandler();
     console.log(formInf);

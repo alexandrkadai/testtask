@@ -45,21 +45,14 @@ const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
   const editTask = (id: number, title: string, description: string, file: any) => {
     const updatedTasks = taskItems.map((task) => {
-      if (task.id === id && file) {
+      if (task.id === id ) {
         return {
           ...task,
-          title: title,
-          description: description,
-          file: task.file,
+          title: title !== '' ? title : task.title,
+          description: description !== '' ? description : task.description,
+          file: file !== '' ? file : task.file,
         };
-      } else{
-        return {
-          ...task,
-          title: title,
-          description: description,
-        };
-      }
-
+      } 
     return task;
     });
     setTaskItems(updatedTasks);
