@@ -22,7 +22,7 @@ const Tasks = () => {
   }
 
   return  (
-    <div className="w-[500px] h-auto bg-gray-50 rounded-md shadow-md shadow-blue-300">
+    <div className="w-[500px] h-auto mb-10 bg-gray-50 rounded-md shadow-md shadow-blue-300">
       <div className="justify-center items-center text-center mt-5">
         <span className="text-2xl text-blue-600 font-bold ">Your Tasks</span>
         <div className="w-full h-auto rounded-md p-5 mt-5 ">

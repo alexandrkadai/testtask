@@ -5,7 +5,7 @@ import { ITASK_TYPE, TaskContextType } from '../TYPES/TASK_TYPES';
 const CreateTask = () => {
   const { saveTask } = useContext(TaskContext) as TaskContextType;
   const [formInf, setFormInf] = useState<ITASK_TYPE | {}>();
-  
+
   const titleForm = useRef<HTMLInputElement>(null);
   const descriptionForm = useRef<HTMLInputElement>(null);
   const fileForm = useRef<HTMLInputElement>(null);
@@ -38,6 +38,9 @@ const CreateTask = () => {
 
     saveTask(newTask);
     alert('Task Created');
+    titleForm.current.value='';
+    descriptionForm.current.value='';
+    fileForm.current!.value='';
   }
   else {
     alert('Please fill all the fields');
